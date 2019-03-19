@@ -1,0 +1,9 @@
+from google.cloud import bigquery
+client = bigquery.Client()
+
+MAX_RESULTS = 100
+
+dataset = client.get_dataset(client.dataset('usa_names', project="bigquery-public-data"))
+table = client.get_table(dataset.table(('usa_1910_2013')))
+rows = client.list_rows(table, max_results=MAX_RESULTS)
+
