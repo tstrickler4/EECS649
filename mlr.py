@@ -63,14 +63,3 @@ print('Coefficients: \n', regr.coef_)
 
 newData = [0, 2030]
 print ('Predicted Occurrence Example (gender = 0, year = 2030): \n', regr.predict([newData]))
-
-
-#-------------------------------------------- Stats Models --------------------------------------------#
-# with statsmodels
-# X = sm.add_constant(X) # adding a constant
-#
-# model = sm.OLS(Y, X).fit()
-# predictions = model.predict(X)
-#
-# print_model = model.summary()
-# print(print_model)
