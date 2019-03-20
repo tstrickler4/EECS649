@@ -16,6 +16,9 @@ class Find:
         return "Preceded by: {}\nFollowed by: {}\n".format(
                 ', '.join(precede), ', '.join(follow))
 
+    preceding = property(lambda self: self._prev)
+    following = property(lambda self: self._next)
+
     def prev(self, item):
         if not hasattr(self._prev, item):
             self._prev[item] = 0
@@ -67,6 +70,9 @@ def consclusters(names, truncate_final_e=True):
                 ret[last_diph].next(cons)
     return ret
 
+def print_dict(dict):
+    [print(i + ":", str(j)) for i, j in dict.items()]
+
 if __name__ == '__main__':
     test = consclusters(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
-    [print(i + ":", str(j)) for i, j in test.items()]
+    print_dict(test)

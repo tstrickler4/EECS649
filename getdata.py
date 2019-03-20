@@ -8,7 +8,12 @@ MAX_RESULTS = 100
 
 dataset = client.get_dataset(client.dataset('usa_names', project="bigquery-public-data"))
 table = client.get_table(dataset.table(('usa_1910_2013')))
-rows = client.list_rows(table, max_results=MAX_RESULTS)
+# list_rows returns an iterator over a named-tuple like object whose attributes are
+# the table column names: `name`, `year`, `gender`, `state`, and `number`
+# this is, however an ITERATOR that must be emptied with [i for i in rows]
+rows = [i for i in client.list_rows(table, max_results=MAX_RESULTS)]
 
-print("analyzing names")
-analysis = disnames.consclusters([i.name for i in rows])
+if __name__ == "__main__":
+    print("analyzing names")
+    analysis = disnames.consclusters([i.name for i in rows])
+    disnames.print_dict(analysis)
