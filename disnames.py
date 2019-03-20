@@ -9,8 +9,10 @@ class Find:
         return "<Find(prev={}, next={})>".format(repr(self._prev), repr(self._next))
 
     def __str__(self):
-        precede = [i + " ({})".format(j) if j > 1 else "" for i,j in self._prev.items()]
-        follow = [i + " ({})".format(j) if j > 1 else "" for i,j in self._next.items()]
+        precede = [repr(i) + (" ({})".format(j) if j > 1 else "")
+                for i,j in self._prev.items()]
+        follow = [repr(i) + (" ({})".format(j) if j > 1 else "")
+                for i,j in self._next.items()]
         return "Preceded by: {}\nFollowed by: {}\n".format(
                 ', '.join(precede), ', '.join(follow))
 
@@ -64,3 +66,7 @@ def consclusters(names, truncate_final_e=True):
             if last_diph:
                 ret[last_diph].next(cons)
     return ret
+
+if __name__ == '__main__':
+    test = consclusters(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
+    [print(i + ":", str(j)) for i, j in test.items()]
