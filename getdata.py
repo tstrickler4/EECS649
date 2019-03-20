@@ -11,7 +11,7 @@ table = client.get_table(dataset.table(('usa_1910_2013')))
 # list_rows returns an iterator over a named-tuple like object whose attributes are
 # the table column names: `name`, `year`, `gender`, `state`, and `number`
 # this is, however an ITERATOR that must be emptied with [i for i in rows]
-rows = client.list_rows(table, max_results=MAX_RESULTS)
+rows = [i for i in client.list_rows(table, max_results=MAX_RESULTS)]
 
 if __name__ == "__main__":
     print("analyzing names")
