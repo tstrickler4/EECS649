@@ -16,6 +16,9 @@ class Find:
         return "Preceded by: {}\nFollowed by: {}\n".format(
                 ', '.join(precede), ', '.join(follow))
 
+    preceding = property(lambda self: self._prev)
+    following = property(lambda self: self._next)
+
     def prev(self, item):
         if not hasattr(self._prev, item):
             self._prev[item] = 0
