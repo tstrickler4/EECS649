@@ -14,6 +14,8 @@ def plotScatter(x, y, title, xlabel, ylabel):
 
 #-------------------------------------------- Reading Data --------------------------------------------#
 
+print("Running...")
+
 data = {}
 
 file = open('../KS_new.csv')
@@ -62,4 +64,4 @@ print('Coefficients: \n', regr.coef_)
 # prediction with sklearn
 
 newData = [0, 2030]
-print ('Predicted Occurrence Example (gender = 0, year = 2030): \n', regr.predict([newData]))
+print ('Predicted Name Length Example (gender = 0, year = 2030): \n', regr.predict([newData]))
