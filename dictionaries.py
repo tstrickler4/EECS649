@@ -1,3 +1,5 @@
+from keras.utils import to_categorical
+
 states = {
     "AL" : 0, "AK" : 1, "AZ" : 2, "AR" : 3, "CA" : 4,
     "CO" : 5, "CT" : 6, "DE" : 7, "FL" : 8, "GA" : 9,
@@ -11,4 +13,9 @@ states = {
     "VA" : 45, "WA" : 46, "WV" : 47, "WI" : 48, "WY" : 49
 }
 
+for key in states:
+    states[key] = to_categorical(states[key])
+
 genders = {"F" : 0, "M" : 1}
+
+print(states)
