@@ -70,9 +70,14 @@ def consclusters(names, truncate_final_e=True):
                 ret[last_diph].next(cons)
     return ret
 
+def count(name):
+    return len(consclusters([name]))
+
 def print_dict(dict):
     [print(i + ":", str(j)) for i, j in dict.items()]
 
 if __name__ == '__main__':
     test = consclusters(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
+    ct = count(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
     print_dict(test)
+    print_dict(ct)
