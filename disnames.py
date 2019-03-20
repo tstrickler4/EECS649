@@ -8,6 +8,12 @@ class Find:
     def __repr__(self):
         return "<Find(prev={}, next={})>".format(repr(self._prev), repr(self._next))
 
+    def __str__(self):
+        precede = [i + " ({})".format(j) if j > 1 else "" for i,j in self._prev.items()]
+        follow = [i + " ({})".format(j) if j > 1 else "" for i,j in self._next.items()]
+        return "Preceded by: {}\nFollowed by: {}\n".format(
+                ', '.join(precede), ', '.join(follow))
+
     def prev(self, item):
         if not hasattr(self._prev, item):
             self._prev[item] = 0
@@ -20,10 +26,9 @@ class Find:
 
 def consclusters(names, truncate_final_e=True):
     '''
-    Parse a list of names into their a dict whose keys are diphthongs
+    Parse a list of names into a dict whose keys are diphthongs
     (vowel clusters) and values are the consonant clusters that precede/follow them
     '''
-    #TODO Diphthongs
     ret = {}
     for name in names:
         cons = ""
