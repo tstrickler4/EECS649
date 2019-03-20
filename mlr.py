@@ -6,13 +6,17 @@ from getdata import rows
 # test = disnames.consclusters(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
 # [print(i + ":", str(j)) for i, j in test.items()]
 
-states = [i.state for i in rows];
-data = disnames.consclusters([i.name for i in rows]);
-arr = [i.name for i in rows];
-arr2 = [i.year for i in rows];
 
-print(data)
-[print(i + ":", str(j)) for i, j in data.items()]
+nameclusters = disnames.consclusters([i.name for i in rows])
+names = [i.name for i in rows]
+years = [i.year for i in rows]
+genders = [i.gender for i in rows]
+states = [i.state for i in rows]
+occurrences = [i.number for i in rows]
 
-print(arr)
-print(arr2)
+[print(i + ":", str(j)) for i, j in nameclusters.items()]
+print(names)
+print(years)
+print(genders)
+print(states)
+print(occurrences)
