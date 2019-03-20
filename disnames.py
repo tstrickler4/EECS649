@@ -64,3 +64,5 @@ def consclusters(names, truncate_final_e=True):
             if last_diph:
                 ret[last_diph].next(cons)
     return ret
+
+test = consclusters(["Katie", "Jamie", "Ben", "Joe", "Alphonse"])
