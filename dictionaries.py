@@ -18,4 +18,4 @@ states = {
 
 genders = {"F" : 0, "M" : 1}
 
-print(states)
+# print(states)
