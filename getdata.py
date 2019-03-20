@@ -13,6 +13,11 @@ table = client.get_table(dataset.table(('usa_1910_2013')))
 # this is, however an ITERATOR that must be emptied with [i for i in rows]
 rows = [i for i in client.list_rows(table, max_results=MAX_RESULTS)]
 
+total = 0
+for j in rows:
+	total+=j.number
+
+print("total: ",total)
 if __name__ == "__main__":
     print("analyzing names")
     analysis = disnames.consclusters([i.name for i in rows])
