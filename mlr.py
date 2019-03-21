@@ -1,15 +1,8 @@
-from getdata import rows
-import disnames
-import dictionaries
-
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 
 from sklearn import linear_model
 import statsmodels.api as sm
-
-gendersDict = dictionaries.genders
-statesDict = dictionaries.states
 
 def plotScatter(x, y, title, xlabel, ylabel):
     plt.scatter(x, y, color='red')
@@ -20,9 +13,6 @@ def plotScatter(x, y, title, xlabel, ylabel):
     plt.show()
 
 #-------------------------------------------- Data --------------------------------------------#
-
-#NOTE: Treating 'occurrences' as the dependent variable and everything else as independent variables
-
 
 print("Running...")
 
@@ -51,13 +41,14 @@ data['Length'] = lengths
 
 df = DataFrame(data,columns=[i for i in data])
 
+
 #-------------------------------------------- Plotting --------------------------------------------#
 
 #Plot Gender vs Length
-plotScatter(df['Gender'], df['Length'], 'Gender vs Length', 'Gender', 'Length')
-
-#Plot Year vs Length
-plotScatter(df['Year'], df['Length'], 'Year vs Length', 'Year', 'Length')
+# plotScatter(df['Gender'], df['Length'], 'Gender vs Length', 'Gender', 'Length')
+#
+# #Plot Year vs Length
+# plotScatter(df['Year'], df['Length'], 'Year vs Length', 'Year', 'Length')
 
 
 #-------------------------------------------- Multiple Linear Regression --------------------------------------------#
@@ -74,7 +65,19 @@ print('Coefficients: \n', regr.coef_)
 #-------------------------------------------- Prediction --------------------------------------------#
 # prediction with sklearn
 newData = [0, 2030]
-print ('Predicted Length: \n', regr.predict([newData]))
+print ('Predicted Length (gender: 0, year: 2030): \n', regr.predict([newData]))
+
+newData = [1, 2024]
+print ('Predicted Length (gender: 1, year: 2024): \n', regr.predict([newData]))
+
+newData = [0, 2055]
+print ('Predicted Length (gender: 0, year: 2055): \n', regr.predict([newData]))
+
+newData = [1, 3634]
+print ('Predicted Length (gender: 1, year: 3634): \n', regr.predict([newData]))
+
+newData = [1, 5930]
+print ('Predicted Length (gender: 1, year: 5930): \n', regr.predict([newData]))
 
 
 #-------------------------------------------- Stats Models --------------------------------------------#
