@@ -1,8 +1,15 @@
+from getdata import rows
+import disnames
+import dictionaries
+
 from pandas import DataFrame
 import matplotlib.pyplot as plt
-import numpy as np
+
 from sklearn import linear_model
 import statsmodels.api as sm
+
+gendersDict = dictionaries.genders
+statesDict = dictionaries.states
 
 def plotScatter(x, y, title, xlabel, ylabel):
     plt.scatter(x, y, color='red')
@@ -12,13 +19,16 @@ def plotScatter(x, y, title, xlabel, ylabel):
     plt.grid(True)
     plt.show()
 
-#-------------------------------------------- Reading Data --------------------------------------------#
+#-------------------------------------------- Data --------------------------------------------#
+
+#NOTE: Treating 'occurrences' as the dependent variable and everything else as independent variables
+
 
 print("Running...")
 
 data = {}
 
-file = open('../KS_new.csv')
+file = open('KS_new.csv')
 rows = file.read().splitlines()
 file.close()
 genders = []
@@ -29,11 +39,11 @@ for i in range(0, len(rows)):
     col = rows[i].split(',')
     for j in range(0, len(col)):
         if j == 0:
-            genders.append(col[j])
+            genders.append(int(col[j]))
         elif j == 1:
-            years.append(col[j])
+            years.append(int(col[j]))
         else:
-            lengths.append(col[j])
+            lengths.append(int(col[j]))
 
 data['Gender'] = genders
 data['Year'] = years
@@ -44,13 +54,14 @@ df = DataFrame(data,columns=[i for i in data])
 #-------------------------------------------- Plotting --------------------------------------------#
 
 #Plot Gender vs Length
-plotScatter(df['Gender'], df['Length'], 'Scatter Plot', 'Gender', 'Length')
+plotScatter(df['Gender'], df['Length'], 'Gender vs Length', 'Gender', 'Length')
 
 #Plot Year vs Length
-plotScatter(df['Year'], df['Length'], 'Scatter Plot', 'Year', 'Length')
+plotScatter(df['Year'], df['Length'], 'Year vs Length', 'Year', 'Length')
+
 
 #-------------------------------------------- Multiple Linear Regression --------------------------------------------#
-X = df[df.columns.difference(['Length'])] # here we have 2 variables for multiple regression. If you just want to use one variable for simple linear regression, then use X = df['Interest_Rate'] for example.Alternatively, you may add additional variables within the brackets
+X = df[df.columns.difference(['Length'])]
 Y = df['Length']
 #
 # # with sklearn
@@ -62,6 +73,16 @@ print('Coefficients: \n', regr.coef_)
 
 #-------------------------------------------- Prediction --------------------------------------------#
 # prediction with sklearn
-
 newData = [0, 2030]
-print ('Predicted Name Length Example (gender = 0, year = 2030): \n', regr.predict([newData]))
+print ('Predicted Length: \n', regr.predict([newData]))
+
+
+#-------------------------------------------- Stats Models --------------------------------------------#
+# with statsmodels
+X = sm.add_constant(X) # adding a constant
+
+model = sm.OLS(Y, X).fit()
+predictions = model.predict(X)
+
+print_model = model.summary()
+print(print_model)

@@ -4,7 +4,7 @@ import disnames
 print("logging in")
 client = bigquery.Client()
 
-MAX_RESULTS = 0
+MAX_RESULTS = 100
 
 dataset = client.get_dataset(client.dataset('usa_names', project="bigquery-public-data"))
 table = client.get_table(dataset.table(('usa_1910_2013')))
