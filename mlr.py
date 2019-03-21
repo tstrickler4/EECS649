@@ -44,11 +44,11 @@ df = DataFrame(data,columns=[i for i in data])
 
 #-------------------------------------------- Plotting --------------------------------------------#
 
-#Plot Gender vs Length
-# plotScatter(df['Gender'], df['Length'], 'Gender vs Length', 'Gender', 'Length')
-#
-# #Plot Year vs Length
-# plotScatter(df['Year'], df['Length'], 'Year vs Length', 'Year', 'Length')
+Plot Gender vs Length
+plotScatter(df['Gender'], df['Length'], 'Gender vs Length', 'Gender', 'Length')
+
+#Plot Year vs Length
+plotScatter(df['Year'], df['Length'], 'Year vs Length', 'Year', 'Length')
 
 
 #-------------------------------------------- Multiple Linear Regression --------------------------------------------#
