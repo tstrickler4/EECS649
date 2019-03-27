@@ -41,6 +41,28 @@ data['Length'] = lengths
 
 df = DataFrame(data,columns=[i for i in data])
 
+gendersDict = {'F': 0, 'M': 1}
+
+file = open('MO.txt')
+rows = file.read().splitlines()
+file.close()
+
+for i in range(0, len(rows)):
+    col = rows[i].split(',')
+    for j in range(1, 4):
+        if j == 1:
+            genders.append(gendersDict[col[j]])
+        elif j == 2:
+            years.append(int(col[j]))
+        elif j == 3:
+            lengths.append(len(col[j]))
+
+data['Gender'] = genders
+data['Year'] = years
+data['Length'] = lengths
+
+df2 = DataFrame(data,columns=[i for i in data])
+
 
 #-------------------------------------------- Plotting --------------------------------------------#
 
@@ -63,22 +85,12 @@ print('Intercept: \n', regr.intercept_)
 print('Coefficients: \n', regr.coef_)
 
 #-------------------------------------------- Prediction --------------------------------------------#
-# prediction with sklearn
-newData = [0, 2030]
-print ('Predicted Length (gender: 0, year: 2030): \n', regr.predict([newData]))
 
-newData = [1, 2024]
-print ('Predicted Length (gender: 1, year: 2024): \n', regr.predict([newData]))
-
-newData = [0, 2055]
-print ('Predicted Length (gender: 0, year: 2055): \n', regr.predict([newData]))
-
-newData = [1, 3634]
-print ('Predicted Length (gender: 1, year: 3634): \n', regr.predict([newData]))
-
-newData = [1, 5930]
-print ('Predicted Length (gender: 1, year: 5930): \n', regr.predict([newData]))
-
+for i in range(0, len(genders)):
+    gender = genders[i]
+    year = years[i]
+    testData = [gender, year]
+    print('Predicted Length (gender: ',gender, ", year: ", year, "): ", regr.predict([testData]))
 
 #-------------------------------------------- Stats Models --------------------------------------------#
 # with statsmodels
